@@ -7,12 +7,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.ContentAlpha.medium
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,11 +27,12 @@ import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.Shapes
 fun LoginButton(
     modifier: Modifier = Modifier,
     loadingState: Boolean = false,
-    primaryText: String = "Sign IN with Google",
+    primaryText: String = "Sign in with Google",
     secondaryText: String = "Please Wait...",
     icon: Int = R.drawable.ic_google_logo,
     shape: Shape = Shapes.medium,
     border: Color = Color.LightGray,
+    borderStrokeWidth: Dp = 1.dp,
     backgroundColor: Color = MaterialTheme.colors.surface,
     progressIndicator: Color = LoadingBlue,
     onClick: () -> Unit
@@ -50,12 +51,12 @@ fun LoginButton(
                 onClick()
             },
         shape = shape,
-        border = BorderStroke(width = 1.dp, color = border),
+        border = BorderStroke(width = borderStrokeWidth, color = border),
         color = backgroundColor
     ) {
         Row(
             modifier = Modifier
-                .padding(start = 12.dp, end = 16.dp, top = 12.dp, bottom = 12.dp)
+                .padding(12.dp)
                 .animateContentSize(
                     animationSpec = tween(
                         durationMillis = 300,
@@ -86,6 +87,6 @@ fun LoginButton(
 
 @Composable
 @Preview
-fun buttonPreview(){
+fun buttonPreview() {
     LoginButton {}
 }

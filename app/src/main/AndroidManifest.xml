@@ -3,6 +3,7 @@
     package="com.odogwudev.user_authentication_compose_ktor_mongodb">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.User_authentication_compose_ktor_mongodb">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

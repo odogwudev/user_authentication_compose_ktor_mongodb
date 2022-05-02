@@ -3,13 +3,8 @@ package com.odogwudev.user_authentication_compose_ktor_mongodb
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.odogwudev.user_authentication_compose_ktor_mongodb.navigation.SetupNavGraph
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.User_authentication_compose_ktor_mongodbTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,27 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             User_authentication_compose_ktor_mongodbTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                val navController = rememberNavController()
+                SetupNavGraph(navController = navController)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    User_authentication_compose_ktor_mongodbTheme {
-        Greeting("Android")
     }
 }

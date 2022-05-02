@@ -1,4 +1,3 @@
-
 package com.odogwudev.user_authentication_compose_ktor_mongodb.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -17,7 +16,7 @@ import java.net.CookieManager
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@OptIn(ExperimentalSerializationApi::class)
+@ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {

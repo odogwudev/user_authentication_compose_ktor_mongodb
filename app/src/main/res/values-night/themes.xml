@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.User_authentication_compose_ktor_mongodb" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/gray_700</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 </resources>

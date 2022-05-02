@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">user_authentication_compose_ktor_mongodb</string>
+    <string name="sign_in_title">Sign in to Continue</string>
+    <string name="sign_in_subtitle">Please sign in to get access</string>
 </resources>

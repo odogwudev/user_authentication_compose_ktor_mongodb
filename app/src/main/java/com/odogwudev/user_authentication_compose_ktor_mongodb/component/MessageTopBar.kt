@@ -6,7 +6,6 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -30,22 +29,17 @@ import java.net.SocketTimeoutException
 
 @Composable
 fun MessageTopBar(messageBarState: MessageBarState) {
-
-    var startAnimation by remember {
-        mutableStateOf(false)
-    }
-    var errorMessage by remember {
-        mutableStateOf("")
-    }
+    var startAnimation by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
 
     LaunchedEffect(key1 = messageBarState) {
         if (messageBarState.error != null) {
             errorMessage = when (messageBarState.error) {
                 is SocketTimeoutException -> {
-                    "Connection Time Out Exception"
+                    "Connection Timeout Exception."
                 }
                 is ConnectException -> {
-                    "Internet Connection Unavailable"
+                    "Internet Connection Unavailable."
                 }
                 else -> {
                     "${messageBarState.error.message}"
@@ -54,11 +48,12 @@ fun MessageTopBar(messageBarState: MessageBarState) {
         }
         startAnimation = true
         delay(3000)
-        startAnimation = false //message bar vicible for just 3 seconds
+        startAnimation = false
     }
 
     AnimatedVisibility(
-        visible = messageBarState.error != null && startAnimation || messageBarState.message != null && startAnimation,
+        visible = messageBarState.error != null && startAnimation
+                || messageBarState.message != null && startAnimation,
         enter = expandVertically(
             animationSpec = tween(300),
             expandFrom = Alignment.Top
@@ -68,13 +63,18 @@ fun MessageTopBar(messageBarState: MessageBarState) {
             shrinkTowards = Alignment.Top
         )
     ) {
-        message(messageBarState = messageBarState, errorMessage = errorMessage)
+        Message(
+            messageBarState = messageBarState,
+            errorMessage = errorMessage
+        )
     }
-
 }
 
 @Composable
-fun message(messageBarState: MessageBarState, errorMessage: String= "") {
+fun Message(
+    messageBarState: MessageBarState,
+    errorMessage: String = ""
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -84,13 +84,17 @@ fun message(messageBarState: MessageBarState, errorMessage: String= "") {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = if (messageBarState.error != null) Icons.Default.Warning else Icons.Default.Check,
+            imageVector =
+            if (messageBarState.error != null) Icons.Default.Warning
+            else Icons.Default.Check,
             contentDescription = "Message Bar Icon",
             tint = Color.White
         )
-        Divider(modifier = Modifier.width(12.dp), color = Color.Transparent)
+        Spacer(modifier = Modifier.width(12.dp))
         Text(
-            text = if (messageBarState.error != null) errorMessage else messageBarState.message.toString(),
+            text =
+            if (messageBarState.error != null) errorMessage
+            else messageBarState.message.toString(),
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.typography.button.fontSize,
@@ -98,23 +102,21 @@ fun message(messageBarState: MessageBarState, errorMessage: String= "") {
             maxLines = 1
         )
     }
-
 }
 
 @Composable
 @Preview
-fun messageBarPreview() {
-    message(
-        messageBarState = MessageBarState(message = "Succesfully Updated"),
-        errorMessage = "Internet Connection not available"
+fun MessageBarPreview() {
+    Message(
+        messageBarState = MessageBarState(message = "Successfully Updated.")
     )
 }
 
 @Composable
 @Preview
-fun messageBarErrorPreview() {
-    message(
+fun MessageBarErrorPreview() {
+    Message(
         messageBarState = MessageBarState(error = SocketTimeoutException()),
-        errorMessage = "Connection Time Out Exception"
+        errorMessage = "Connection Timeout Exception."
     )
 }

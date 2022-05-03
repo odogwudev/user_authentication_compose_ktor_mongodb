@@ -16,6 +16,51 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.odogwudev.user_authentication_compose_ktor_mongodb.util.Constants.CLIENT_ID
 
+@Composable
+fun StartActivityForResult(
+    key: Any,
+    onResultReceived: (String) -> Unit,
+    onDialogDismissed: () -> Unit,
+    launcher: (ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>) -> Unit
+) {
+    val activity = LocalContext.current as Activity
+    val activityLauncher = rememberLauncherForActivityResult(//fetch result from intent
+        contract = ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        try {
+            if (result.resultCode == Activity.RESULT_OK) {
+                val oneTapClient = Identity.getSignInClient(activity)
+                val credentials = oneTapClient.getSignInCredentialFromIntent(result.data)
+                val tokenId = credentials.googleIdToken
+                if (tokenId != null) {
+                    onResultReceived(tokenId)
+                }
+            } else {
+                Log.d("StartActivityForResult", "BLACK SCRIM CLICKED, DIALOG CLOSED.")
+                onDialogDismissed()
+            }
+        } catch (e: ApiException) {
+            when (e.statusCode) {
+                CommonStatusCodes.CANCELED -> {
+                    Log.d("StartActivityForResult", "ONE-TAP DIALOG CANCELED.")
+                    onDialogDismissed()
+                }
+                CommonStatusCodes.NETWORK_ERROR -> {
+                    Log.d("StartActivityForResult", "ONE-TAP NETWORK ERROR.")
+                    onDialogDismissed()
+                }
+                else -> {
+                    Log.d("StartActivityForResult", "${e.message}")
+                    onDialogDismissed()
+                }
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = key) {
+        launcher(activityLauncher)
+    }
+}
 
 fun signIn(
     activity: Activity,

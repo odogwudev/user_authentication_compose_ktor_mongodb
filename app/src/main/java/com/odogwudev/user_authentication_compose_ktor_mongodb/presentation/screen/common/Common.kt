@@ -36,7 +36,7 @@ fun StartActivityForResult(
                     onResultReceived(tokenId)
                 }
             } else {
-                Log.d("StartActivityForResult", "BLACK SCRIM CLICKED, DIALOG CLOSED.")
+                Log.d("StartActivityForResult", "CLOSE BUTTON CLICKED, DIALOG CLOSED.")
                 onDialogDismissed()
             }
         } catch (e: ApiException) {

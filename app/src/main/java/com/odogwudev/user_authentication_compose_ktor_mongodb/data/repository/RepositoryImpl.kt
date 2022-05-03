@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
-    private val dataStore: DataStoreOperation
+    private val dataStoreOperation: DataStoreOperation
 ) : Repository {
     override suspend fun saveSignedinState(signedIn: Boolean) {
-        dataStore.saveSignedInState(signedIn = signedIn)
+        dataStoreOperation.saveSignedInState(signedIn = signedIn)
     }
 
     override fun readSignedINState(): Flow<Boolean> {
-        return dataStore.readSignedInState()
+        return dataStoreOperation.readSignedInState()
     }
 }

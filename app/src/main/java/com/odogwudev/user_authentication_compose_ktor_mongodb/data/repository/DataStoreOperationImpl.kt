@@ -11,8 +11,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
+import androidx.datastore.preferences.core.*
 
-class DataStoreOperationImpl @Inject constructor(private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences>) :
+class DataStoreOperationImpl @Inject constructor(private val dataStore: DataStore<Preferences>) :
     DataStoreOperation {
 
     private object PreferencesKey {

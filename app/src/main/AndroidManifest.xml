@@ -7,18 +7,19 @@
 
     <application
         android:name=".MyApplication"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.User_authentication_compose_ktor_mongodb"
-        android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:windowSoftInputMode="adjustResize"
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.User_authentication_compose_ktor_mongodb"
-            android:windowSoftInputMode="adjustResize">
+            android:theme="@style/Theme.User_authentication_compose_ktor_mongodb">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

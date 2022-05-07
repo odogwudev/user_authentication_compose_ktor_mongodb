@@ -21,29 +21,25 @@ import androidx.compose.ui.unit.dp
 import com.odogwudev.user_authentication_compose_ktor_mongodb.R
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.LoadingBlue
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.Shapes
-
-
 @Composable
 fun LoginButton(
     modifier: Modifier = Modifier,
     loadingState: Boolean = false,
     primaryText: String = "Sign in with Google",
-    secondaryText: String = "Please Wait...",
+    secondaryText: String = "Please wait...",
     icon: Int = R.drawable.ic_google_logo,
     shape: Shape = Shapes.medium,
-    border: Color = Color.LightGray,
-    borderStrokeWidth: Dp = 1.dp,
+    borderColor: Color = Color.LightGray,
     backgroundColor: Color = MaterialTheme.colors.surface,
-    progressIndicator: Color = LoadingBlue,
+    borderStrokeWidth: Dp = 1.dp,
+    progressIndicatorColor: Color = LoadingBlue,
     onClick: () -> Unit
 ) {
-    var buttonText by remember {
-        mutableStateOf(primaryText)
-    }
+    var buttonText by remember { mutableStateOf(primaryText) }
+
     LaunchedEffect(key1 = loadingState) {
         buttonText = if (loadingState) secondaryText else primaryText
     }
-
 
     Surface(
         modifier = modifier
@@ -51,7 +47,7 @@ fun LoginButton(
                 onClick()
             },
         shape = shape,
-        border = BorderStroke(width = borderStrokeWidth, color = border),
+        border = BorderStroke(width = borderStrokeWidth, color = borderColor),
         color = backgroundColor
     ) {
         Row(
@@ -68,25 +64,26 @@ fun LoginButton(
         ) {
             Icon(
                 painter = painterResource(id = icon),
-                contentDescription = "Logo",
+                contentDescription = "Google Logo",
                 tint = Color.Unspecified
             )
-
             Spacer(modifier = Modifier.width(8.dp))
             Text(text = buttonText)
             if (loadingState) {
                 Spacer(modifier = Modifier.width(16.dp))
                 CircularProgressIndicator(
-                    modifier = Modifier.size(16.dp), strokeWidth = 2.dp, color = progressIndicator
+                    modifier = Modifier
+                        .size(16.dp),
+                    strokeWidth = 2.dp,
+                    color = progressIndicatorColor
                 )
             }
         }
-
     }
 }
 
 @Composable
 @Preview
-fun buttonPreview() {
-    LoginButton {}
+fun GoogleButtonPreview() {
+    LoginButton() {}
 }

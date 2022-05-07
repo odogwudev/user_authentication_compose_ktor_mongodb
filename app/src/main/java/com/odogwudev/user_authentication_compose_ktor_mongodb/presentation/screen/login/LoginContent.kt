@@ -20,7 +20,6 @@ import com.odogwudev.user_authentication_compose_ktor_mongodb.R
 import com.odogwudev.user_authentication_compose_ktor_mongodb.component.LoginButton
 import com.odogwudev.user_authentication_compose_ktor_mongodb.component.MessageTopBar
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.MessageBarState
-
 @Composable
 fun LoginContent(
     signedInState: Boolean,

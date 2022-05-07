@@ -34,7 +34,6 @@ fun LoginScreen(
             )
         }
     )
-
     val activity = LocalContext.current as Activity
 
     StartActivityForResult(

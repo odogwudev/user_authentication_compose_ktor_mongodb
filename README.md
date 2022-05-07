@@ -213,3 +213,5 @@ Here are some Links
 JWT
 [JWT](https://jwt.io/)
 
+Ktor starter template
+[Ktor](https://start.ktor.io/#/settings?name=ktor-sample&website=example.com&artifact=com.example.ktor-sample&kotlinVersion=1.6.21&ktorVersion=2.0.1&buildSystem=GRADLE_KTS&engine=NETTY&configurationIn=CODE&addSampleCode=true&plugins=)

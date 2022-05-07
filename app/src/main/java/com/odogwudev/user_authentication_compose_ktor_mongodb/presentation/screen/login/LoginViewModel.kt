@@ -19,11 +19,12 @@ class LoginViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _signedInState: MutableState<Boolean> = mutableStateOf(false)//private variable
+    private val _signedInState: MutableState<Boolean> = mutableStateOf(false)
     val signedInState: State<Boolean> = _signedInState
 
     private val _messageBarState: MutableState<MessageBarState> = mutableStateOf(MessageBarState())
     val messageBarState: State<MessageBarState> = _messageBarState
+
 
     init {
         viewModelScope.launch {
@@ -46,9 +47,9 @@ class LoginViewModel @Inject constructor(
     }
 
 
+
 }
 
 class GoogleAccountNotFoundException(
     override val message: String? = "Google Account Not Found."
 ) : Exception()
-

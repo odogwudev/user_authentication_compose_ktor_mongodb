@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.topAppBarBackgroundColor
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.topAppBarContentColor
-
 @Composable
 fun LoginTopBar() {
     TopAppBar(

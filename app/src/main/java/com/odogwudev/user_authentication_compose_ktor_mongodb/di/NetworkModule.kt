@@ -1,6 +1,7 @@
 package com.odogwudev.user_authentication_compose_ktor_mongodb.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.odogwudev.user_authentication_compose_ktor_mongodb.data.remote.KtorApi
 import com.odogwudev.user_authentication_compose_ktor_mongodb.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -39,4 +40,10 @@ object NetworkModule {
         return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
             .addConverterFactory(Json.asConverterFactory(contentType)).build()
     }
+    @Provides
+    @Singleton
+    fun provideKtorApi(retrofit: Retrofit): KtorApi {
+        return retrofit.create(KtorApi::class.java)
+    }
+
 }

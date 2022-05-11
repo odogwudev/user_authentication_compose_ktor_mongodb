@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.readSignedINState().collect { completed ->
+            repository.readSignedInState().collect { completed ->
                 _signedInState.value = completed
             }
         }
@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(
 
     fun saveSignedInState(signedIn: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.saveSignedinState(signedIn = signedIn)
+            repository.saveSignedInState(signedIn = signedIn)
         }
     }
 

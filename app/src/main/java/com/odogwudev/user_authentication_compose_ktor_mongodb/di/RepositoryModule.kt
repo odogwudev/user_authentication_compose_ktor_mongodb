@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.odogwudev.user_authentication_compose_ktor_mongodb.data.remote.KtorApi
 import com.odogwudev.user_authentication_compose_ktor_mongodb.data.repository.DataStoreOperationImpl
 import com.odogwudev.user_authentication_compose_ktor_mongodb.data.repository.RepositoryImpl
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.repository.DataStoreOperation
@@ -16,7 +17,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,14 +40,15 @@ object RepositoryModule {
         return DataStoreOperationImpl(dataStore = dataStore)
     }
 
-
     @Provides
     @Singleton
     fun provideRepository(
-        dataStoreOperation: DataStoreOperation
+        dataStoreOperations: DataStoreOperation,
+        ktorApi: KtorApi
     ): Repository {
         return RepositoryImpl(
-            dataStoreOperation = dataStoreOperation
+            dataStoreOperations = dataStoreOperations,
+            ktorApi = ktorApi
         )
     }
 

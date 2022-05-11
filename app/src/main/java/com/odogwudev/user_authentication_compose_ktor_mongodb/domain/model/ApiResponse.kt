@@ -9,5 +9,5 @@ data class ApiResponse(
     val user: User? = null,
     val message: String? = null,
     @Transient
-    val error: Exception? = null
+    val error: Exception? = null//marking it invvinsible for the whole serialization process
 )

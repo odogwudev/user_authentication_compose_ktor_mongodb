@@ -13,16 +13,17 @@ import java.io.IOException
 import javax.inject.Inject
 import androidx.datastore.preferences.core.*
 
-class DataStoreOperationImpl @Inject constructor(private val dataStore: DataStore<Preferences>) :
-    DataStoreOperation {
+class DataStoreOperationImpl @Inject constructor(
+    private val dataStore: DataStore<Preferences>
+) : DataStoreOperation {
 
     private object PreferencesKey {
-        val signedKey = booleanPreferencesKey(name = PREFERENCES_SIGNED_IN_KEY)
+        val signedInKey = booleanPreferencesKey(name = PREFERENCES_SIGNED_IN_KEY)
     }
 
     override suspend fun saveSignedInState(signedIn: Boolean) {
         dataStore.edit { preferences ->
-            preferences[PreferencesKey.signedKey] = signedIn
+            preferences[PreferencesKey.signedInKey] = signedIn
         }
     }
 
@@ -36,7 +37,7 @@ class DataStoreOperationImpl @Inject constructor(private val dataStore: DataStor
                 }
             }
             .map { preferences ->
-                val signedInState = preferences[PreferencesKey.signedKey] ?: false
+                val signedInState = preferences[PreferencesKey.signedInKey] ?: false
                 signedInState
             }
     }

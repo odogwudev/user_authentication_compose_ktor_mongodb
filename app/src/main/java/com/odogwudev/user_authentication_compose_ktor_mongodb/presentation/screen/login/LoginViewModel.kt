@@ -6,8 +6,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.ApiRequest
+import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.ApiResponse
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.MessageBarState
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.repository.Repository
+import com.odogwudev.user_authentication_compose_ktor_mongodb.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -25,6 +28,9 @@ class LoginViewModel @Inject constructor(
     private val _messageBarState: MutableState<MessageBarState> = mutableStateOf(MessageBarState())
     val messageBarState: State<MessageBarState> = _messageBarState
 
+    private val _apiResponse: MutableState<RequestState<ApiResponse>> =
+        mutableStateOf(RequestState.Idle)
+    val apiResponse: State<RequestState<ApiResponse>> = _apiResponse
 
     init {
         viewModelScope.launch {
@@ -46,7 +52,23 @@ class LoginViewModel @Inject constructor(
         )
     }
 
-
+    fun verifyTokenOnBackend(request: ApiRequest) {
+        Log.d("LoginViewModel", request.tokenId)
+        _apiResponse.value = RequestState.Loading
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val response = repository.verifyTokenOnBackend(request = request)
+                _apiResponse.value = RequestState.Success(response)//response after verifying would be in form of api response
+                _messageBarState.value = MessageBarState(
+                    message = response.message,
+                    error = response.error
+                )
+            }
+        } catch (e: Exception) {
+            _apiResponse.value = RequestState.Error(e)
+            _messageBarState.value = MessageBarState(error = e)
+        }
+    }
 
 }
 

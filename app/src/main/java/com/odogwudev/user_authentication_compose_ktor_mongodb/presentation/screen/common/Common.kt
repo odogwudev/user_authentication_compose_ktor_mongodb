@@ -24,7 +24,7 @@ fun StartActivityForResult(
     launcher: (ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>) -> Unit
 ) {
     val activity = LocalContext.current as Activity
-    val activityLauncher = rememberLauncherForActivityResult(//fetch result from intent
+    val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartIntentSenderForResult()
     ) { result ->
         try {
@@ -36,7 +36,7 @@ fun StartActivityForResult(
                     onResultReceived(tokenId)
                 }
             } else {
-                Log.d("StartActivityForResult", "CLOSE BUTTON CLICKED, DIALOG CLOSED.")
+                Log.d("StartActivityForResult", "BLACK SCRIM CLICKED, DIALOG CLOSED.")
                 onDialogDismissed()
             }
         } catch (e: ApiException) {
@@ -76,7 +76,7 @@ fun signIn(
                 .setFilterByAuthorizedAccounts(true)
                 .build()
         )
-        .setAutoSelectEnabled(true)//allows you to sign into one tap without need for tapping continue
+        .setAutoSelectEnabled(true)
         .build()
 
     oneTapClient.beginSignIn(signInRequest)

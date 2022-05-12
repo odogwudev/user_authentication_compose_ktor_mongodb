@@ -1,16 +1,11 @@
 package com.odogwudev.user_authentication_compose_ktor_mongodb.presentation.screen.profile
 
 import androidx.compose.material.*
-import com.odogwudev.user_authentication_compose_ktor_mongodb.R
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.odogwudev.user_authentication_compose_ktor_mongodb.R
+import com.odogwudev.user_authentication_compose_ktor_mongodb.component.DisplayAlertDialog
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.topAppBarBackgroundColor
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.topAppBarContentColor
 
@@ -34,7 +29,6 @@ fun ProfileTopBar(
             )
         }
     )
-
 }
 
 @Composable
@@ -42,19 +36,23 @@ fun ProfileTopBarActions(
     onSave: () -> Unit,
     onDeleteAllConfirmed: () -> Unit,
 ) {
-    var openDialog by remember { mutableStateOf(false) }
+    var openDialog by remember { mutableStateOf(false) }//remember across multiple compositions
 
-
+    DisplayAlertDialog(
+        openDialog = openDialog,
+        onYesClicked = { onDeleteAllConfirmed() },
+        onDialogClosed = { openDialog = false }
+    )
 
     SaveAction(onSave = onSave)
-    DeleteAllAction(onDelete = { openDialog = true })
+    DeleteAllAction(onDelete = { openDialog = true})
 }
 
 @Composable
 fun SaveAction(onSave: () -> Unit) {
     IconButton(onClick = onSave) {
         Icon(
-            painter = painterResource(id =  R.drawable.ic_save),
+            painter = painterResource(id = R.drawable.ic_save),
             contentDescription = "Save Icon",
             tint = MaterialTheme.colors.topAppBarContentColor
         )

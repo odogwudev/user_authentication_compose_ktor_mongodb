@@ -7,20 +7,20 @@ import retrofit2.http.*
 
 interface KtorApi {
 
-    @POST("/token_verification")// verify tokenid passing api request that contains token id that needs to verified on the server
+    @POST("/token_verification")
     suspend fun verifyTokenOnBackend(
         @Body request: ApiRequest
     ): ApiResponse
 
-    @GET("/get_user_info")
+    @GET("/get_user")
     suspend fun getUserInfo(): ApiResponse
 
-    @PUT("/update_user_info")
+    @PUT("/update_user")
     suspend fun updateUser(
-        @Body userUpdate: UserUpdate// object contains first name last name
+        @Body userUpdate: UserUpdate
     ): ApiResponse
 
-    @DELETE("/delete_user_info")
+    @DELETE("/delete_user")
     suspend fun deleteUser(): ApiResponse
 
     @GET("/sign_out")

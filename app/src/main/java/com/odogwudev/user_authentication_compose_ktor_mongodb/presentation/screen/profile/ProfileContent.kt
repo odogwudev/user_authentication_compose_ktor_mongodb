@@ -16,7 +16,7 @@ import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.odogwudev.user_authentication_compose_ktor_mongodb.R
 import com.odogwudev.user_authentication_compose_ktor_mongodb.component.LoginButton
-import com.odogwudev.user_authentication_compose_ktor_mongodb.component.MessageTopBar
+import com.odogwudev.user_authentication_compose_ktor_mongodb.component.MessageBar
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.ApiResponse
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.MessageBarState
 import com.odogwudev.user_authentication_compose_ktor_mongodb.ui.theme.LoadingBlue
@@ -47,7 +47,7 @@ fun ProfileContent(
                     color = LoadingBlue
                 )
             } else {
-                MessageTopBar(messageBarState = messageBarState)
+                MessageBar(messageBarState = messageBarState)
             }
         }
         Column(

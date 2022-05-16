@@ -27,8 +27,9 @@ import kotlinx.coroutines.delay
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
+
 @Composable
-fun MessageTopBar(messageBarState: MessageBarState) {
+fun MessageBar(messageBarState: MessageBarState) {
     var startAnimation by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
 

@@ -15,11 +15,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.tooling.*
 import com.odogwudev.user_authentication_compose_ktor_mongodb.R
 import com.odogwudev.user_authentication_compose_ktor_mongodb.component.LoginButton
-import com.odogwudev.user_authentication_compose_ktor_mongodb.component.MessageTopBar
+import com.odogwudev.user_authentication_compose_ktor_mongodb.component.MessageBar
 import com.odogwudev.user_authentication_compose_ktor_mongodb.domain.model.MessageBarState
+
 @Composable
 fun LoginContent(
     signedInState: Boolean,
@@ -31,7 +31,7 @@ fun LoginContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            MessageTopBar(messageBarState = messageBarState)
+            MessageBar(messageBarState = messageBarState)
         }
         Column(
             modifier = Modifier

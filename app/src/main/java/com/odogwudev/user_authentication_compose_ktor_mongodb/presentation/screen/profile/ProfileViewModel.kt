@@ -48,6 +48,7 @@ class ProfileViewModel @Inject constructor(
         _apiResponse.value = RequestState.Loading
         viewModelScope.launch {
             try {
+                //trigger thus on dispatchersio
                 val response = withContext(Dispatchers.IO) {
                     repository.getUserInfo()
                 }
@@ -123,6 +124,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    // i use this for sign out
     fun clearSession() {
         _clearSessionResponse.value = RequestState.Loading
         _apiResponse.value = RequestState.Loading
@@ -143,6 +145,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    // this is for sign out and also clears user session
     fun deleteUser() {
         _clearSessionResponse.value = RequestState.Loading
         _apiResponse.value = RequestState.Loading

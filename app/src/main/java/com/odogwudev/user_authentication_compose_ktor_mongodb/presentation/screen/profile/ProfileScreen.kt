@@ -69,6 +69,7 @@ fun ProfileScreen(
 
     val activity = LocalContext.current as Activity
 
+    //this is to handle session removal
     StartActivityForResult(
         key = apiResponse,
         onResultReceived = { tokenId ->
@@ -82,6 +83,7 @@ fun ProfileScreen(
         }
     ) { activityLauncher ->
         if (apiResponse is RequestState.Success) {
+            //check state for session immediately after 404 error it resigns you thereby maintaining state
             val response = (apiResponse as RequestState.Success<ApiResponse>).data
             if (response.error is HttpException && response.error.code() == 401) {
                 signIn(
